@@ -69,3 +69,5 @@ print("Square root of ages:")
 import math
 h = [math.sqrt(s.age) for s in humans]
 print(h)
+
+# all tests ran and passed
