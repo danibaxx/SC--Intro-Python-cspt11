@@ -1,12 +1,6 @@
 # Create a class to hold a city location. Call the class "City". It should have
 # fields for name, lat and lon (representing latitude and longitude).
 
-class City():
-  def __init__(self, name, lat, lon):
-    self.name = name
-    self.lat = lat
-    self.lon = lon
-
 
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
@@ -20,6 +14,18 @@ class City():
 #
 # Note that the first line of the CSV is header that describes the fields--this
 # should not be loaded into a City object.
+import csv
+
+class City():
+  def __init__(self, name, lat, lon):
+    self.name = name
+    self.lat = lat
+    self.lon = lon
+
+  def __str__(self):
+    # holds information from each item we want printed
+    return f'City: {self.name}, Latitude: {self.lat}, Longitude: {self.lon}'
+
 cities = []
 
 def cityreader(cities=[]):
@@ -27,6 +33,22 @@ def cityreader(cities=[]):
   # Ensure that the lat and lon valuse are all floats
   # For each city record, create a new City instance and add it to the 
   # `cities` list
+  # opens csv file within project
+  with open(r'C:\Users\Danielle\Lambda\SC--Intro-Python-cspt11\src\cityreader\cities.csv', 'r', newline='') as read:
+    
+    # put csv file into a variable to be able to read
+    csv_reader = csv.reader(read, delimiter=',')
+
+    # header variable to skip labels within csv file
+    header = next (csv_reader)
+
+    # accessing each row within csv file
+    for row in csv_reader:
+      # print(row) finding city name, lat, lon
+
+      # created curr_city variable to hold new Tuple of City and the rows we wanted
+      curr_city = City(row[0], float(row[3]), float(row[4]))
+      cities.append(curr_city)
     
     return cities
 
